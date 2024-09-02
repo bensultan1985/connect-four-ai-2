@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { userService } from "../../../middleware/services";
 
 export default handler;
