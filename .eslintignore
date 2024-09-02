@@ -1,0 +1,4 @@
+./components/AppFooter.tsx
+./components/ConnectFour.jsx
+./components/ToDoList.tsx
+./components/UserDashboard.tsx
