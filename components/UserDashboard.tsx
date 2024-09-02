@@ -7,7 +7,7 @@ export function UserDashboard(props: any) {
   return (
     <Container size="lg">
       <Box m="md" p="sm">
-        <Text>{user}'s Lyst</Text>
+        <Text>{user}&apos;s Lyst</Text>
         <CreateToDo></CreateToDo>
       </Box>
       <ToDoList

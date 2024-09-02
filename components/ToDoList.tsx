@@ -30,8 +30,8 @@ export function ToDoList() {
     <>
       <Container>
         {status != "loading" &&
-          todos.map((todo) => (
-            <ToDo header={todo.header} complete={todo.complete} />
+          todos.map((todo: any, index) => (
+            <ToDo header={todo.header} complete={todo.complete} key={index} />
           ))}
       </Container>
     </>

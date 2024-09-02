@@ -13,16 +13,15 @@ export function AppFooter() {
       })}
       height="auto"
       fixed
-      children={
-        <Text m={4} mx={20} align="center">
-          <span style={{ marginRight: "20px" }}>Copyright 2022</span>
-          {websiteData.optional.footerBusinessLinks.map((link, i) => (
-            <Anchor mx={20} href={link.link} key={i} style={{ color: "white" }}>
-              {link.label}
-            </Anchor>
-          ))}
-        </Text>
-      }
-    ></Footer>
+    >
+      <Text m={4} mx={20} align="center">
+        <span style={{ marginRight: "20px" }}>Copyright 2022</span>
+        {websiteData.optional.footerBusinessLinks.map((link, i) => (
+          <Anchor mx={20} href={link.link} key={i} style={{ color: "white" }}>
+            {link.label}
+          </Anchor>
+        ))}
+      </Text>
+    </Footer>
   );
 }
