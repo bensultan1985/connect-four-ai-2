@@ -20,7 +20,7 @@ const Home: NextPage = (props) => {
           </Container>
         ) : (
           <Container>
-            <Title>Welcome</Title>
+            <Title>Connect Four</Title>
             <ConnectFour></ConnectFour>
             {/* <Image
               my="xl"

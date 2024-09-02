@@ -39,10 +39,12 @@
     background-color: yellow;
   }
   
-  button .connect-four-button {
-    margin: 20px;
+  .connectFourButton {
+    margin: 50px 0px;
     padding: 10px 20px;
     font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
   }
 
   .highlight {
@@ -51,3 +53,19 @@
 
   }
   
+  .infoGrid {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    justify-content: center;
+    margin-top: 10px;
+    border: solid;
+    border-radius: 10px;
+    border-width: 4px;
+    border-color: rgb(227, 140, 0);
+  }
+  
+  .infoCell {
+    padding: 10px;
+  }

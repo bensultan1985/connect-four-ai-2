@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./connectFour.module.css";
 
 export const ConnectFour = () => {
@@ -9,17 +9,30 @@ export const ConnectFour = () => {
       .fill(null)
       .map(() => Array(columns).fill(null))
   );
-  const [player, setPlayer] = useState("user"); // 'user' or 'ai'
-  const [winner, setWinner] = useState(null);
+  const [player, setPlayer] = useState(); // 'user' or 'ai'
+  const [userPieces, setUserPieces] = useState(21);
+  const [aiPieces, setAiPieces] = useState(21);
+  const [winner, setWinner] = useState(false);
+  const [winnerMessage, setWinnerMessage] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
   const [highlightedCol, setHighlightedCol] = useState(null);
-
-  const addMove = (col) => {
+  const [showGame, setShowGame] = useState(false);
+  useEffect(() => {
+    console.log(grid);
+    if (player == "ai") {
+      handleAITurn(); // AI turn after user move
+    }
+  }, [grid, gameStarted]);
+  const addMove = (col, color) => {
+    console.log("taking turn");
     console.log(col);
+    console.log(player);
     const newGrid = grid.map((row) => row.slice());
     for (let row = rows - 1; row >= 0; row--) {
+      console.log(grid);
+      console.log(newGrid[row][col]);
       if (!newGrid[row][col]) {
-        newGrid[row][col] = player === "user" ? "blue" : "red";
+        newGrid[row][col] = color;
         break;
       }
     }
@@ -28,35 +41,47 @@ export const ConnectFour = () => {
   };
 
   const handleClick = async (col) => {
+    if (player === "ai") return;
     if (winner || !gameStarted) return; // Prevent clicks if game is over or game hasn't started
 
-    const newGrid = addMove(col);
+    const newGrid = addMove(col, "blue");
 
     const winnerCheck = checkWinner(newGrid);
 
     if (winnerCheck) {
-      setWinner(winnerCheck === "blue" ? "user" : "ai");
+      setWinner("user");
+      setWinnerMessage("You Won!");
       return;
     }
+    setUserPieces(userPieces - 1);
+    if (userPieces === 0) {
+      setWinner("tie");
+      setWinnerMessage("Tie Game!");
+    }
     setPlayer("ai");
-    await handleAITurn(newGrid); // AI turn after user move
   };
 
-  const handleAiTurnEnd = async (col) => {
-    if (winner || !gameStarted) return; // Prevent clicks if game is over or game hasn't started
-    if (typeof col == "string") col = parseInt(col);
-    const newGrid = addMove(col);
+  const handleAiTurnEnd = async (col, firstTurn) => {
+    if (winner || (!gameStarted && firstTurn !== true)) return; // Prevent clicks if game is over or game hasn't started
+    console.log("hit2");
+    const newGrid = addMove(col, "red");
 
     const winnerCheck = checkWinner(newGrid);
 
     if (winnerCheck) {
-      setWinner(winnerCheck === "blue" ? "user" : "ai");
+      setWinner("ai");
+      setWinnerMessage("AI Beat You! Try again!");
       return;
+    }
+    setAiPieces(aiPieces - 1);
+    if (aiPieces === 0) {
+      setWinner("ai");
+      setWinnerMessage("Tie game!");
     }
     setPlayer("user");
   };
 
-  const handleAITurn = async (currentGrid) => {
+  const handleAITurn = async (firstTurn) => {
     // Call your OpenAI API here
     console.log("fetching AI turn...");
     const response = await fetch("/api/getAiMove", {
@@ -64,13 +89,14 @@ export const ConnectFour = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ grid: currentGrid }),
+      body: JSON.stringify({ grid: grid }),
     });
 
     const { thisTurn } = await response.json();
     console.log("this is this turn", thisTurn);
-    const colIndex = parseInt(thisTurn.charAt(1)) - 1; // Assuming format like 'c4'
-    handleAiTurnEnd(colIndex);
+    const colIndex = parseInt(thisTurn); // Assuming format like 'c4'
+    await handleAiTurnEnd(colIndex, firstTurn);
+    return;
   };
 
   const checkWinner = (grid) => {
@@ -154,19 +180,27 @@ export const ConnectFour = () => {
         .fill(null)
         .map(() => Array(columns).fill(null))
     );
-    setPlayer("user");
-    setWinner(null);
+    // setPlayer("user");
+    console.log("reset game");
+    setWinner(false);
     setGameStarted(false);
+    setWinnerMessage("");
+    setWinner("");
+    setUserPieces(21);
+    setAiPieces(21);
+    setShowGame(false);
   };
 
   const startGame = async () => {
-    console.log("clicked start game");
+    setShowGame(true);
+    console.log("game started");
     setGameStarted(true);
+    console.log("set game started", gameStarted);
     const firstPlayer = Math.random() < 0.5 ? "user" : "ai";
     setPlayer(firstPlayer);
     if (firstPlayer === "ai") {
       // Give the AI the first move
-      setTimeout(async () => await handleAITurn(grid), 500); // Adding a slight delay for a better user experience
+      await handleAITurn(true); // Adding a slight delay for a better user experience
     }
   };
 
@@ -180,39 +214,52 @@ export const ConnectFour = () => {
 
   return (
     <div>
-      <button
-        className={styles["connect-four-button"]}
-        onClick={startGame}
-        disabled={gameStarted}
-      >
-        Start Game
-      </button>
-      <div className={styles.grid}>
-        {grid[0].map((_, colIndex) => (
-          <div key={colIndex} className={styles.column}>
-            {grid.map((row, rowIndex) => {
-              let highlight =
-                highlightedCol === colIndex ? styles.highlight : "";
-              return (
-                <div
-                  key={rowIndex}
-                  className={`${styles.cell} ${
-                    styles[row[colIndex]]
-                  } ${highlight}`}
-                  onClick={() => handleClick(colIndex)}
-                  onMouseEnter={() => handleMouseEnter(colIndex)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  {/* {row[colIndex]} */}
-                </div>
-              );
-            })}
+      {!showGame && (
+        <button
+          className={styles.connectFourButton}
+          onClick={startGame}
+          disabled={gameStarted}
+        >
+          Start Game
+        </button>
+      )}
+      {showGame && (
+        <>
+          <div name={"gameInfo"} className={styles.infoGrid}>
+            <div className={styles.infoCell}>
+              {player === "user" ? "It's Your Turn" : "ChatGPT's Turn"}
+            </div>
           </div>
-        ))}
-      </div>
+          <div></div>
+          <div></div>
+          <div className={styles.grid}>
+            {grid[0].map((_, colIndex) => (
+              <div key={colIndex} className={styles.column}>
+                {grid.map((row, rowIndex) => {
+                  let highlight =
+                    highlightedCol === colIndex ? styles.highlight : "";
+                  return (
+                    <div
+                      key={rowIndex}
+                      className={`${styles.cell} ${
+                        styles[row[colIndex]]
+                      } ${highlight}`}
+                      onClick={() => handleClick(colIndex)}
+                      onMouseEnter={() => handleMouseEnter(colIndex)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      {/* {row[colIndex]} */}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
       {winner && (
         <div>
-          <p>{winner === "blue" ? "You win!" : "AI wins!"}</p>
+          <p>{winnerMessage}</p>
           <button className={styles["connect-four-button"]} onClick={resetGame}>
             Play Again
           </button>

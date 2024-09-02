@@ -1,7 +1,7 @@
 export const appConfig = {
   websiteMetaData: {
     suggested: {
-      title: "Connect Four",
+      title: "A Buncha BS",
       description: "The fast and easy todo list maker!",
       favicon: "",
     },
@@ -14,7 +14,7 @@ export const appConfig = {
   },
   websiteData: {
     suggested: {
-      title: "Connect Four",
+      title: "BS Games",
     },
     optional: {
       footerLinkGroups: [
