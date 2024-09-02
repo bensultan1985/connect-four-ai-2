@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
-// import "./connect-four-styles.scss";
+import React, { useState } from "react";
+import styles from "./connectFour.module.css";
 
 export const ConnectFour = () => {
   const rows = 6;
   const columns = 7;
-  const [grid, setGrid] = useState(Array(rows).fill(Array(columns).fill(null)));
+  const [grid, setGrid] = useState(
+    Array(rows)
+      .fill(null)
+      .map(() => Array(columns).fill(null))
+  );
   const [player, setPlayer] = useState("user"); // 'user' or 'ai'
   const [winner, setWinner] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
+  const [highlightedCol, setHighlightedCol] = useState(null);
 
-  const handleClick = async (col) => {
-    if (winner || !gameStarted) return; // Prevent clicks if game is over or game hasn't started
-
+  const addMove = (col) => {
+    console.log(col);
     const newGrid = grid.map((row) => row.slice());
     for (let row = rows - 1; row >= 0; row--) {
       if (!newGrid[row][col]) {
@@ -20,19 +24,36 @@ export const ConnectFour = () => {
       }
     }
     setGrid(newGrid);
+    return newGrid;
+  };
+
+  const handleClick = async (col) => {
+    if (winner || !gameStarted) return; // Prevent clicks if game is over or game hasn't started
+
+    const newGrid = addMove(col);
 
     const winnerCheck = checkWinner(newGrid);
+
     if (winnerCheck) {
       setWinner(winnerCheck === "blue" ? "user" : "ai");
       return;
     }
+    setPlayer("ai");
+    await handleAITurn(newGrid); // AI turn after user move
+  };
 
-    if (player === "user") {
-      setPlayer("ai");
-      await handleAITurn(newGrid); // AI turn after user move
-    } else {
-      setPlayer("user");
+  const handleAiTurnEnd = async (col) => {
+    if (winner || !gameStarted) return; // Prevent clicks if game is over or game hasn't started
+    if (typeof col == "string") col = parseInt(col);
+    const newGrid = addMove(col);
+
+    const winnerCheck = checkWinner(newGrid);
+
+    if (winnerCheck) {
+      setWinner(winnerCheck === "blue" ? "user" : "ai");
+      return;
     }
+    setPlayer("user");
   };
 
   const handleAITurn = async (currentGrid) => {
@@ -49,7 +70,7 @@ export const ConnectFour = () => {
     const { thisTurn } = await response.json();
     console.log("this is this turn", thisTurn);
     const colIndex = parseInt(thisTurn.charAt(1)) - 1; // Assuming format like 'c4'
-    handleClick(colIndex);
+    handleAiTurnEnd(colIndex);
   };
 
   const checkWinner = (grid) => {
@@ -128,7 +149,11 @@ export const ConnectFour = () => {
   };
 
   const resetGame = () => {
-    setGrid(Array(rows).fill(Array(columns).fill(null)));
+    setGrid(
+      Array(rows)
+        .fill(null)
+        .map(() => Array(columns).fill(null))
+    );
     setPlayer("user");
     setWinner(null);
     setGameStarted(false);
@@ -139,7 +164,6 @@ export const ConnectFour = () => {
     setGameStarted(true);
     const firstPlayer = Math.random() < 0.5 ? "user" : "ai";
     setPlayer(firstPlayer);
-    console.log(firstPlayer);
     if (firstPlayer === "ai") {
       // Give the AI the first move
       setTimeout(async () => await handleAITurn(grid), 500); // Adding a slight delay for a better user experience
@@ -147,52 +171,51 @@ export const ConnectFour = () => {
   };
 
   const handleMouseEnter = (colIndex) => {
-    if (winner || !gameStarted) return;
-    const newGrid = grid.map((row) => row.slice());
-    for (let row = 0; row < rows; row++) {
-      if (!newGrid[row][colIndex]) {
-        newGrid[row][colIndex] = "hover";
-        break;
-      }
-    }
-    setGrid(newGrid);
+    setHighlightedCol(colIndex);
   };
 
-  const handleMouseLeave = (colIndex) => {
-    const newGrid = grid.map((row) => row.slice());
-    for (let row = 0; row < rows; row++) {
-      if (newGrid[row][colIndex] === "hover") {
-        newGrid[row][colIndex] = null;
-        break;
-      }
-    }
-    setGrid(newGrid);
+  const handleMouseLeave = () => {
+    setHighlightedCol(null);
   };
 
   return (
     <div>
-      <button onClick={startGame} disabled={gameStarted}>
+      <button
+        className={styles["connect-four-button"]}
+        onClick={startGame}
+        disabled={gameStarted}
+      >
         Start Game
       </button>
-      <div className="grid">
-        {grid.map((row, rowIndex) => (
-          <div key={rowIndex} className="row">
-            {row.map((cell, colIndex) => (
-              <div
-                key={colIndex}
-                className={`cell ${cell}`}
-                onClick={() => handleClick(colIndex)}
-                onMouseEnter={() => handleMouseEnter(colIndex)}
-                onMouseLeave={() => handleMouseLeave(colIndex)}
-              />
-            ))}
+      <div className={styles.grid}>
+        {grid[0].map((_, colIndex) => (
+          <div key={colIndex} className={styles.column}>
+            {grid.map((row, rowIndex) => {
+              let highlight =
+                highlightedCol === colIndex ? styles.highlight : "";
+              return (
+                <div
+                  key={rowIndex}
+                  className={`${styles.cell} ${
+                    styles[row[colIndex]]
+                  } ${highlight}`}
+                  onClick={() => handleClick(colIndex)}
+                  onMouseEnter={() => handleMouseEnter(colIndex)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {/* {row[colIndex]} */}
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
       {winner && (
         <div>
           <p>{winner === "blue" ? "You win!" : "AI wins!"}</p>
-          <button onClick={resetGame}>Play Again</button>
+          <button className={styles["connect-four-button"]} onClick={resetGame}>
+            Play Again
+          </button>
         </div>
       )}
     </div>

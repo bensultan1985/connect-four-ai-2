@@ -5,7 +5,7 @@ import { useMantineTheme } from "@mantine/core";
 export default function LoginSection() {
   const { data: session } = useSession();
   const theme = useMantineTheme();
-  console.log(theme);
+  // console.log(theme);
   if (session) {
     return (
       <span style={{ textAlign: "right" }}>

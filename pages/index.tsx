@@ -10,7 +10,7 @@ import { ConnectFour } from "../components/ConnectFour";
 
 const Home: NextPage = (props) => {
   const { data: session } = useSession();
-  console.log(theme);
+  // console.log(theme);
   return (
     <div className={styles.container}>
       <main className={styles.main}>
