@@ -226,11 +226,11 @@ export const ConnectFour = () => {
             <div className={styles.infoCell}>
               {player === "user" ? (
                 <span style={{ color: "blue", fontWeight: "600" }}>
-                  It's Your Turn
+                  It&apos;s Your Turn
                 </span>
               ) : (
                 <span style={{ color: "red", fontWeight: "600" }}>
-                  It's ChatGPT's Turn
+                  It&apos;s ChatGPT&apos;s Turn
                 </span>
               )}
             </div>
