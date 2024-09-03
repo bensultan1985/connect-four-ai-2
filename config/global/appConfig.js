@@ -1,8 +1,8 @@
 export const appConfig = {
   websiteMetaData: {
     suggested: {
-      title: "A Buncha BS",
-      description: "The fast and easy todo list maker!",
+      title: "BS Games",
+      description: "BS Games: The Western Cure for Boredom",
       favicon: "",
     },
     optional: {
