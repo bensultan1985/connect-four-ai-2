@@ -3,6 +3,8 @@ import Link from "next/link";
 import LoginSection from "./LoginSection";
 import { masterConfig } from "../config";
 import { brandConfig } from "../config";
+import { Menu, Button, Text } from "@mantine/core";
+import { IconMenu2 } from "@tabler/icons";
 
 export function AppHeader() {
   return (
@@ -25,7 +27,25 @@ export function AppHeader() {
               </Title>
             </Link>
           </div>
+          {/* <div></div> */}
           <LoginSection></LoginSection>
+
+          <div style={{ textAlign: "right", marginTop: "4px" }}>
+            <Menu shadow="md" width={200}>
+              <Menu.Target>
+                <Button style={{ maxWidth: "160px", alignSelf: "right" }}>
+                  <span style={{ marginRight: "10px" }}>Browse Games</span>{" "}
+                  <IconMenu2 size={14}></IconMenu2>
+                </Button>
+              </Menu.Target>
+
+              <Menu.Dropdown style={{ textAlign: "left" }}>
+                <Menu.Label>Games</Menu.Label>
+                <Menu.Item>Connect Four</Menu.Item>
+                <Menu.Divider />
+              </Menu.Dropdown>
+            </Menu>
+          </div>
         </SimpleGrid>
       </Header>
     </Anchor>

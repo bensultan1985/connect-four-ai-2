@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./connectFour.module.css";
+import { Center } from "@mantine/core";
 
 export const ConnectFour = () => {
   const rows = 6;
@@ -18,19 +19,13 @@ export const ConnectFour = () => {
   const [highlightedCol, setHighlightedCol] = useState(null);
   const [showGame, setShowGame] = useState(false);
   useEffect(() => {
-    console.log(grid);
     if (player == "ai") {
       handleAITurn(); // AI turn after user move
     }
   }, [grid, gameStarted]);
   const addMove = (col, color) => {
-    console.log("taking turn");
-    console.log(col);
-    console.log(player);
     const newGrid = grid.map((row) => row.slice());
     for (let row = rows - 1; row >= 0; row--) {
-      console.log(grid);
-      console.log(newGrid[row][col]);
       if (!newGrid[row][col]) {
         newGrid[row][col] = color;
         break;
@@ -50,7 +45,9 @@ export const ConnectFour = () => {
 
     if (winnerCheck) {
       setWinner("user");
-      setWinnerMessage("You Won!");
+      setWinnerMessage(
+        "You won! You defeated AI, and earth is safe another day!"
+      );
       return;
     }
     setUserPieces(userPieces - 1);
@@ -63,14 +60,13 @@ export const ConnectFour = () => {
 
   const handleAiTurnEnd = async (col, firstTurn) => {
     if (winner || (!gameStarted && firstTurn !== true)) return; // Prevent clicks if game is over or game hasn't started
-    console.log("hit2");
     const newGrid = addMove(col, "red");
 
     const winnerCheck = checkWinner(newGrid);
 
     if (winnerCheck) {
       setWinner("ai");
-      setWinnerMessage("AI Beat You! Try again!");
+      setWinnerMessage("ChatGPT beat you bad! Try again!");
       return;
     }
     setAiPieces(aiPieces - 1);
@@ -93,7 +89,7 @@ export const ConnectFour = () => {
     });
 
     const { thisTurn } = await response.json();
-    console.log("this is this turn", thisTurn);
+    console.log("AI chose column, ", thisTurn);
     const colIndex = parseInt(thisTurn); // Assuming format like 'c4'
     await handleAiTurnEnd(colIndex, firstTurn);
     return;
@@ -195,7 +191,6 @@ export const ConnectFour = () => {
     setShowGame(true);
     console.log("game started");
     setGameStarted(true);
-    console.log("set game started", gameStarted);
     const firstPlayer = Math.random() < 0.5 ? "user" : "ai";
     setPlayer(firstPlayer);
     if (firstPlayer === "ai") {
@@ -215,19 +210,32 @@ export const ConnectFour = () => {
   return (
     <div>
       {!showGame && (
-        <button
-          className={styles.connectFourButton}
-          onClick={startGame}
-          disabled={gameStarted}
-        >
-          Start Game
-        </button>
+        <Center>
+          <button
+            className={styles.connectFourButton}
+            onClick={startGame}
+            disabled={gameStarted}
+          >
+            Start Game
+          </button>
+        </Center>
       )}
       {showGame && (
         <>
           <div name={"gameInfo"} className={styles.infoGrid}>
             <div className={styles.infoCell}>
-              {player === "user" ? "It's Your Turn" : "ChatGPT's Turn"}
+              {player === "user" ? (
+                <span style={{ color: "blue", fontWeight: "600" }}>
+                  It's Your Turn
+                </span>
+              ) : (
+                <span style={{ color: "red", fontWeight: "600" }}>
+                  It's ChatGPT's Turn
+                </span>
+              )}
+            </div>
+            <div className={styles.infoCell}>
+              You have {userPieces} chips left.
             </div>
           </div>
           <div></div>
