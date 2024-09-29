@@ -56,7 +56,13 @@ const validateMove = (gameBoard, move) => {
   // Check if the column has available space
   console.log({ move });
   console.log(gameBoard[0][move]);
-  if (move == undefined || move == null) return false;
+  if (
+    move == undefined ||
+    move == null ||
+    move < 0 ||
+    move > gameBoard[0].length
+  )
+    return false;
   if (gameBoard[0][move] == null || gameBoard[0][move] == undefined) {
     return true; // Return the move if there's space in the column
   }
