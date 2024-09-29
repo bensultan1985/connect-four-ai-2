@@ -20,7 +20,7 @@ export default function App({
   pageProps: { session, theme, ...pageProps },
 }: AppProps<{ session: Session; theme: MantineThemeOverride }>) {
   const websiteMetaData = masterConfig.global.appConfig.websiteMetaData;
-  console.log(theme);
+  // console.log(theme);
   return (
     <>
       <Head>

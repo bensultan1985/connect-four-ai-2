@@ -20,7 +20,7 @@ export const ConnectFour = () => {
   const [showGame, setShowGame] = useState(false);
   useEffect(() => {
     if (player == "ai") {
-      handleAITurn(); // AI turn after user move
+      handleAITurn(false); // AI turn after user move
     }
   }, [grid, gameStarted]);
   const addMove = (col, color) => {
@@ -79,13 +79,14 @@ export const ConnectFour = () => {
 
   const handleAITurn = async (firstTurn) => {
     // Call your OpenAI API here
+    let allowedMoves = getAllowedMoves(grid);
     console.log("fetching AI turn...");
     const response = await fetch("/api/getAiMove", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ grid: grid }),
+      body: JSON.stringify({ grid, allowedMoves }),
     });
 
     const { thisTurn } = await response.json();
@@ -275,6 +276,13 @@ export const ConnectFour = () => {
       )}
     </div>
   );
+};
+
+const getAllowedMoves = (grid) => {
+  return grid[0].reduce((acc, curr, index) => {
+    if (curr == null || curr == undefined) acc.push(index);
+    return acc;
+  }, []);
 };
 
 export default ConnectFour;
