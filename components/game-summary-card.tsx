@@ -7,12 +7,19 @@ interface ToDoProps {
 }
 
 export const GameSummaryCard = ({
-  title = null,
-  summary = null,
-  image = null,
-  availability = null,
-  ai = null,
+  title,
+  summary,
+  image,
+  availability = "",
+  ai,
   link = "",
+}: {
+  title?: any;
+  summary?: any;
+  image?: any;
+  availability?: any;
+  ai?: any;
+  link?: any;
 }) => {
   const router = useRouter();
   return (

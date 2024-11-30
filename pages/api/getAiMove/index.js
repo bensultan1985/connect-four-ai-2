@@ -42,9 +42,11 @@ const handleMove = async (req, res) => {
     if (!validMove) {
       thisMove = await handleMove(req, res);
       thisTurn = JSON.parse(thisMove).move;
+      return;
+    } else {
+      console.log(`valid, returning ${thisTurn}`);
+      return thisTurn;
     }
-    console.log(`valid, returning ${thisTurn}`);
-    return thisTurn;
   } catch (e) {
     const thisMove = await handleMove(req, res);
     console.log(`error caught, retried, returning ${thisMove}`);
