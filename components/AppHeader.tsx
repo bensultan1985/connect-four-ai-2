@@ -23,7 +23,12 @@ export function AppHeader() {
           <div>
             <Link href={"/"}>
               <Title style={{ display: "inline-block" }}>
-                {masterConfig.global.appConfig.websiteData.suggested.title}
+                {/* {masterConfig.global.appConfig.websiteData.suggested.title} */}
+                <span style={{ color: "#fa5252" }}>Boredom</span>
+                <span></span>
+                <span style={{ color: "white" }}> Sucks</span>
+                <span style={{ color: "#bababa" }}>!!!</span>
+                {/* BS Gamez */}
               </Title>
             </Link>
           </div>
@@ -33,7 +38,17 @@ export function AppHeader() {
           <div style={{ textAlign: "right", marginTop: "4px" }}>
             <Menu shadow="md" width={200}>
               <Menu.Target>
-                <Button style={{ maxWidth: "160px", alignSelf: "right" }}>
+                <Button
+                  color="red"
+                  // variant="outline"
+                  style={{
+                    maxWidth: "160px",
+                    alignSelf: "right",
+                    // color: "white",
+                    // borderColor: "black",
+                    // background: "red",
+                  }}
+                >
                   <span style={{ marginRight: "10px" }}>Browse Games</span>{" "}
                   <IconMenu2 size={14}></IconMenu2>
                 </Button>

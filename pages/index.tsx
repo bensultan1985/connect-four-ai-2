@@ -1,14 +1,25 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Anchor, Container, Text, Title, Image } from "@mantine/core";
+import {
+  Anchor,
+  Container,
+  Text,
+  Title,
+  Image,
+  Button,
+  CardSection,
+} from "@mantine/core";
 import { UserDashboard } from "../components/UserDashboard";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { theme } from "../styles/mantineGlobalTheme";
-import { ConnectFour } from "../components/ConnectFour";
+import { ConnectFourGame } from "../components/ConnectFour";
+import { useRouter } from "next/router";
+import { GameSummaryCard } from "../components/game-summary-card";
 
 const Home: NextPage = (props) => {
+  const router = useRouter();
   const { data: session } = useSession();
   // console.log(theme);
   return (
@@ -20,8 +31,176 @@ const Home: NextPage = (props) => {
           </Container>
         ) : (
           <Container>
-            <Title>Connect Four</Title>
-            <ConnectFour></ConnectFour>
+            <Title>So, you're bored to death? We got the remedy!</Title>
+            <div
+              style={{
+                display: "flex",
+                marginTop: "30px",
+                marginBottom: "32px",
+              }}
+            >
+              <div style={{ flex: 1 }}>
+                <Image
+                  // className="mt-5"
+                  // my="xl"
+                  src="/images/logos/bsgames3.png"
+                  width={200}
+                ></Image>
+              </div>
+              <div
+                style={{
+                  flex: 3,
+                  border: "solid",
+                  borderWidth: "4px",
+                  borderRadius: "25px",
+                  padding: "20px",
+                  fontWeight: 600,
+                }}
+              >
+                <div style={{ marginBottom: "10px" }}>
+                  Hey <b>Fellow Gamer</b>,<br></br>
+                </div>
+                <b style={{ color: "red" }}>Benji</b> here! I'm a one-dude game
+                developing operation. No fancy corporate fat-cats here. Just
+                blood, sweat, and code! My games are medicinal, OTC to cure your
+                boredom. So whether you're waiting on the supermarket checkout
+                line or fighting off zzz's on the subway, jump into a quick game
+                and feel the time fly by!
+              </div>
+            </div>
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  // position: "absolute",
+                  zIndex: 100,
+                  margin: "20px",
+                  height: "80%",
+                  display: "flex",
+                  gridTemplateColumns: "1fr 1fr",
+                }}
+              >
+                <div
+                  style={{
+                    flex: 1,
+                    border: "solid",
+                    borderWidth: "4px",
+                    borderRadius: "25px",
+                    padding: "20px",
+                    background: "white",
+                    fontWeight: 600,
+                    maxWidth: "50%",
+                    height: "100%",
+                    width: "100%",
+                    // borderColor: "#b00038",
+                    alignContent: "right",
+                  }}
+                >
+                  <span>
+                    <div style={{ marginBottom: "10px" }}>
+                      ...and <b style={{ color: "#2a74b6" }}>I'm Artie...</b>
+                    </div>
+                    <b style={{ color: "#2a74b6" }}>...Artie Intelligence</b>.
+                    My prime directive is to{" "}
+                    <b style={{ color: "red" }}>KILL</b>... your boredom. I can
+                    play against you in games marked{" "}
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        color: "#c3ffe1",
+                        border: "solid",
+                        borderRadius: "25px",
+                        padding: "1px 8px",
+                        borderWidth: "2px",
+                        borderColor: "#c3ffe1",
+                        background: "#2a74b6",
+                      }}
+                    >
+                      Powered by Artie
+                    </span>
+                  </span>
+                </div>
+                <div
+                  style={{
+                    border: "solid",
+                    borderColor: "white",
+                    borderRadius: "25px",
+                    flex: 1,
+                    padding: "0px 10px",
+                  }}
+                >
+                  <Image
+                    style={{
+                      flex: 1,
+                      padding: "0px 10px",
+                    }}
+                    // className="mt-5"
+                    // my="xl"
+                    src="/images/logos/artie.png"
+                    height={150}
+                    // width={800}
+                  ></Image>
+                </div>
+              </div>
+            </div>
+            {/* <Button
+              onClick={() => {
+                router.push("/connect-four");
+              }}
+            >
+              Connect Four
+            </Button> */}
+            <Title style={{ marginTop: "24px", minWidth: "280px" }}>
+              Featured Games
+            </Title>
+            <Image
+              style={{ padding: "0px", textAlign: "left" }}
+              src="/images/logos/squares.png"
+              height={4}
+              width="100%"
+            ></Image>
+            <div
+              className="three-flex"
+              style={{
+                display: "flex",
+                gridTemplateColumns: "1fr 1fr 1fr",
+                marginTop: "20px",
+                gridGap: "5px",
+                gridTemplateRows: "1fr 1fr 1fr",
+              }}
+            >
+              <GameSummaryCard
+                title="Connect Four"
+                summary={
+                  <div>Can you outsmart Artie in a round of connect four?</div>
+                }
+                image="/images/logos/connectfour2.PNG"
+                ai={true}
+                link="/connect-four"
+              ></GameSummaryCard>
+              <GameSummaryCard
+                title="Beardle"
+                image="/images/logos/beardle.PNG"
+                link="/beardle"
+                summary={
+                  <div>
+                    Like Wordle, but for beards! Guess the mystery man behind
+                    the beard! Over 365 beard puzzles in all!
+                  </div>
+                }
+              ></GameSummaryCard>
+              <GameSummaryCard
+                title="NewsLibz"
+                summary="MadLibs on steroids! This game automatically grabs the latest NY Times article summaries and turns them into libs!"
+                link="/newslibz"
+                image="/images/logos/newslibz.PNG"
+              ></GameSummaryCard>
+              <GameSummaryCard
+                title="Tankarus"
+                summary="A simple yet addicting 2D tank shooter, similar to the early 2000s game, Snowball Fight."
+                image="/images/logos/tankarus.PNG"
+                availability="unreleased"
+              ></GameSummaryCard>
+            </div>
             {/* <Image
               my="xl"
               src="http://localhost:3000/images/logos/heroimage.jpeg"

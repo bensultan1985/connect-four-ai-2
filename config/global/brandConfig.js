@@ -2,7 +2,7 @@
 export const brandConfig = {
   logoImage: "",
   logoSvg: "",
-  primaryComponentBackgroundColor: "#1434A4",
+  primaryComponentBackgroundColor: "#000000",
   primaryComponentTextColor: "#FFFFFF",
   secondaryComponentBackgroundColor: "#d22d67",
   secondaryComponentTextColor: "#000000",

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./connectFour.module.css";
 import { Center } from "@mantine/core";
 
-export const ConnectFour = () => {
+export const ConnectFourGame = () => {
   const rows = 6;
   const columns = 7;
   const [grid, setGrid] = useState(
@@ -285,4 +285,4 @@ const getAllowedMoves = (grid) => {
   }, []);
 };
 
-export default ConnectFour;
+export default ConnectFourGame;

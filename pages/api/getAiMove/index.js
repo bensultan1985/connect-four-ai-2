@@ -24,7 +24,7 @@ const handleMove = async (req, res) => {
   const allowedMovesString = JSON.stringify(allowedMoves);
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",

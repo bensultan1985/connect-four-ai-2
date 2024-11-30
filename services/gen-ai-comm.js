@@ -21,7 +21,7 @@ const openai = new OpenAI({
 export const genAiComm = async (prompt) => {
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: prompt }],
-    model: "gpt-4o",
+    model: "gpt-4o-mini",
   });
   return completion.choices[0].message.content;
 };
