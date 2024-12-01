@@ -31,7 +31,7 @@ const Home: NextPage = (props) => {
           </Container>
         ) : (
           <Container>
-            <Title>So, you're bored to death? We got the remedy!</Title>
+            <Title>So, you&#39;re bored to death? We got the remedy!</Title>
             <div
               style={{
                 display: "flex",
@@ -60,12 +60,12 @@ const Home: NextPage = (props) => {
                 <div style={{ marginBottom: "10px" }}>
                   Hey <b>Fellow Gamer</b>,<br></br>
                 </div>
-                <b style={{ color: "red" }}>Benji</b> here! I'm a one-dude game
-                developing operation. No fancy corporate fat-cats here. Just
-                blood, sweat, and code! My games are medicinal, OTC to cure your
-                boredom. So whether you're waiting on the supermarket checkout
-                line or fighting off zzz's on the subway, jump into a quick game
-                and feel the time fly by!
+                <b style={{ color: "red" }}>Benji</b> here! I&#39;m a one-dude
+                game developing operation. No fancy corporate fat-cats here.
+                Just blood, sweat, and code! My games are medicinal, OTC to cure
+                your boredom. So whether you&#39;re waiting on the supermarket
+                checkout line or fighting off zzz&#39;s on the subway, jump into
+                a quick game and feel the time fly by!
               </div>
             </div>
             <div style={{ position: "relative" }}>
@@ -97,7 +97,8 @@ const Home: NextPage = (props) => {
                 >
                   <span>
                     <div style={{ marginBottom: "10px" }}>
-                      ...and <b style={{ color: "#2a74b6" }}>I'm Artie...</b>
+                      ...and{" "}
+                      <b style={{ color: "#2a74b6" }}>I&#39;m Artie...</b>
                     </div>
                     <b style={{ color: "#2a74b6" }}>...Artie Intelligence</b>.
                     My prime directive is to{" "}
