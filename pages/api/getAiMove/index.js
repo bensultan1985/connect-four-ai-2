@@ -40,9 +40,10 @@ const handleMove = async (req, res) => {
     // try {
     const validMove = validateMove(grid, thisTurn);
     if (!validMove) {
-      thisMove = await handleMove(req, res);
-      thisTurn = JSON.parse(thisMove).move;
-      return;
+      console.log(`invalid, retrying...`);
+      newMove = await handleMove(req, res);
+      newTurn = JSON.parse(thisMove).move;
+      return newTurn;
     } else {
       console.log(`valid, returning ${thisTurn}`);
       return thisTurn;

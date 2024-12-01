@@ -43,7 +43,7 @@ const Home: NextPage = (props) => {
                 <Image
                   // className="mt-5"
                   // my="xl"
-                  src="/images/logos/bsgames3.png"
+                  src="/images/logos/bsgames3.PNG"
                   width={200}
                 ></Image>
               </div>
@@ -136,7 +136,7 @@ const Home: NextPage = (props) => {
                     }}
                     // className="mt-5"
                     // my="xl"
-                    src="/images/logos/artie.png"
+                    src="/images/logos/artie.PNG"
                     height={150}
                     // width={800}
                   ></Image>

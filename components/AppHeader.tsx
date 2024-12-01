@@ -56,8 +56,28 @@ export function AppHeader() {
 
               <Menu.Dropdown style={{ textAlign: "left" }}>
                 <Menu.Label>Games</Menu.Label>
-                <Menu.Item>Connect Four</Menu.Item>
-                <Menu.Divider />
+                <Menu.Item
+                  onClick={() => {
+                    window.location.href = "/connect-four";
+                  }}
+                >
+                  Connect Four
+                </Menu.Item>
+                <Menu.Item
+                  onClick={() => {
+                    window.location.href = "/beardle";
+                  }}
+                >
+                  Beardle
+                </Menu.Item>
+                <Menu.Item
+                  onClick={() => {
+                    window.location.href = "/newslibz";
+                  }}
+                >
+                  NewsLibz
+                </Menu.Item>
+                {/* <Menu.Divider /> */}
               </Menu.Dropdown>
             </Menu>
           </div>

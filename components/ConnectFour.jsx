@@ -66,7 +66,7 @@ export const ConnectFourGame = () => {
 
     if (winnerCheck) {
       setWinner("ai");
-      setWinnerMessage("ChatGPT beat you bad! Try again!");
+      setWinnerMessage("Artie beat you! Try again!");
       return;
     }
     setAiPieces(aiPieces - 1);
@@ -231,7 +231,7 @@ export const ConnectFourGame = () => {
                 </span>
               ) : (
                 <span style={{ color: "red", fontWeight: "600" }}>
-                  It&apos;s ChatGPT&apos;s Turn
+                  It&apos;s Artie&apos;s Turn
                 </span>
               )}
             </div>
