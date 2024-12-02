@@ -31,7 +31,9 @@ const Home: NextPage = (props) => {
           </Container>
         ) : (
           <Container>
-            <Title>So, you&#39;re bored to death? We got the remedy!</Title>
+            <Title>
+              So, you&#39;re bored to death? We&#39;ve got the remedy!
+            </Title>
             <div
               style={{
                 display: "flex",
@@ -58,14 +60,14 @@ const Home: NextPage = (props) => {
                 }}
               >
                 <div style={{ marginBottom: "10px" }}>
-                  Hey <b>Fellow Gamer</b>,<br></br>
+                  Hey <b>Gamer</b>,<br></br>
                 </div>
                 <b style={{ color: "red" }}>Benji</b> here! I&#39;m a one-dude
                 game developing operation. No fancy corporate fat-cats here.
-                Just blood, sweat, and code! My games are medicinal, OTC to cure
-                your boredom. So whether you&#39;re waiting on the supermarket
-                checkout line or fighting off zzz&#39;s on the subway, jump into
-                a quick game and feel the time fly by!
+                Just blood, sweat, and code! My games are the OTC medicinal cure
+                for your boredom. So whether you&#39;re waiting in a concert
+                line or fighting off zzz&#39;s on the subway, jump into a quick
+                game and feel the time fly by!
               </div>
             </div>
             <div style={{ position: "relative" }}>
