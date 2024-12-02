@@ -37,6 +37,10 @@ export const ConnectFourGame = () => {
 
   const handleClick = async (col) => {
     if (player === "ai") return;
+    //if player clicks on a column that is full, do nothing
+    console.log("clicked column", col);
+    if (grid[0][col] !== null) return;
+    console.log("valid move");
     if (winner || !gameStarted) return; // Prevent clicks if game is over or game hasn't started
 
     const newGrid = addMove(col, "blue");
