@@ -14,7 +14,6 @@ import { theme } from "../styles/mantineGlobalTheme";
 import type { Session } from "next-auth";
 import { masterConfig } from "../config";
 import { brandTheme } from "../middleware/brandService";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 export default function App({
   Component,
@@ -45,9 +44,7 @@ export default function App({
             footer={<AppFooter></AppFooter>}
           >
             <Container>
-              <UserProvider>
-                <Component {...pageProps} />
-              </UserProvider>
+              <Component {...pageProps} />
             </Container>
           </AppShell>
         </MantineProvider>
