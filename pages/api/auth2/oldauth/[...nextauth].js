@@ -4,7 +4,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma, sessionService } from "../../../middleware/services";
+import { prisma, sessionService } from "../../../../middleware/services";
 import { v4 as uuidv4 } from "uuid";
 import Cookies from "cookies";
 // Modules needed to support key generation, token encryption, and HTTP cookie manipulation

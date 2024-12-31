@@ -63,11 +63,11 @@ const Home: NextPage = (props) => {
                   Hey <b>Gamer</b>,<br></br>
                 </div>
                 <b style={{ color: "red" }}>Benji</b> here! I&#39;m a one-dude
-                game developing operation. No fancy corporate fat-cats here.
-                Just blood, sweat, and code! My games are the OTC medicinal cure
-                for your boredom. So whether you&#39;re waiting in a concert
-                line or fighting off zzz&#39;s on the subway, jump into a quick
-                game and feel the time fly by!
+                game development operation. No corporate fat-cats here. Just
+                blood, sweat, and code! My games are the OTC cure for your
+                boredom. So whether you&#39;re waiting in a concert line or
+                fighting off zzz&#39;s on the subway, click a game and feel the
+                time fly by!
               </div>
             </div>
             <div style={{ position: "relative" }}>
