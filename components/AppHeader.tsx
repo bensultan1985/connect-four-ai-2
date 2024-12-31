@@ -5,6 +5,7 @@ import { masterConfig } from "../config";
 import { brandConfig } from "../config";
 import { Menu, Button, Text } from "@mantine/core";
 import { IconMenu2 } from "@tabler/icons";
+import { LoginButton } from "../components/login/headerButton";
 
 export function AppHeader() {
   return (
@@ -80,6 +81,7 @@ export function AppHeader() {
                 {/* <Menu.Divider /> */}
               </Menu.Dropdown>
             </Menu>
+            <LoginButton></LoginButton>
           </div>
         </SimpleGrid>
       </Header>
