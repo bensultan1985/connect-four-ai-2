@@ -10,6 +10,7 @@
     "migration": "npx prisma migrate dev"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@fortawesome/fontawesome-free": "^6.2.0",
