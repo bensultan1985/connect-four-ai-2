@@ -6,7 +6,7 @@ import { brandConfig } from "../config";
 import { Menu, Button, Text } from "@mantine/core";
 import { IconMenu2 } from "@tabler/icons";
 import { LoginButton } from "../components/login/headerButton";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 export function AppHeader() {
   const { data: session } = useSession();
@@ -130,6 +130,7 @@ export function AppHeader() {
                   >
                     Favorites
                   </Menu.Item>
+                  <Menu.Item onClick={() => signOut()}>Logout</Menu.Item>
                   {/* <Menu.Divider /> */}
                 </Menu.Dropdown>
               </Menu>
