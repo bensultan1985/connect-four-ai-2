@@ -1,4 +1,4 @@
-import { Anchor, Header, SimpleGrid, Title } from "@mantine/core";
+import { Anchor, Header, SimpleGrid, Title, Container } from "@mantine/core";
 import Link from "next/link";
 import LoginSection from "./LoginSection";
 import { masterConfig } from "../config";
@@ -6,8 +6,10 @@ import { brandConfig } from "../config";
 import { Menu, Button, Text } from "@mantine/core";
 import { IconMenu2 } from "@tabler/icons";
 import { LoginButton } from "../components/login/headerButton";
+import { useSession } from "next-auth/react";
 
 export function AppHeader() {
+  const { data: session } = useSession();
   return (
     <Anchor>
       <Header
@@ -34,7 +36,7 @@ export function AppHeader() {
             </Link>
           </div>
           {/* <div></div> */}
-          <LoginSection></LoginSection>
+          {/* <LoginSection></LoginSection> */}
 
           <div style={{ textAlign: "right", marginTop: "4px" }}>
             <Menu shadow="md" width={200}>
@@ -83,7 +85,57 @@ export function AppHeader() {
                 {/* <Menu.Divider /> */}
               </Menu.Dropdown>
             </Menu>
-            <LoginButton></LoginButton>
+            {session?.user?.name ? (
+              <Menu shadow="md" width={200}>
+                <Menu.Target>
+                  <Button
+                    // color="red"
+                    color="red"
+                    variant="outline"
+                    // variant="outline"
+                    style={{
+                      maxWidth: "160px",
+                      alignSelf: "right",
+                      marginLeft: "5px",
+                      // color: "white",
+                      // borderColor: "black",
+                      // background: "red",
+                    }}
+                  >
+                    <span style={{ marginRight: "10px" }}>Account</span>{" "}
+                    <IconMenu2 size={14}></IconMenu2>
+                  </Button>
+                </Menu.Target>
+
+                <Menu.Dropdown style={{ textAlign: "left" }}>
+                  {/* <Menu.Label>profile</Menu.Label> */}
+                  <Menu.Item
+                    onClick={() => {
+                      window.location.href = "/connect-four";
+                    }}
+                  >
+                    Profile
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={() => {
+                      window.location.href = "/beardle";
+                    }}
+                  >
+                    Settings
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={() => {
+                      window.location.href = "/newslibz";
+                    }}
+                  >
+                    Favorites
+                  </Menu.Item>
+                  {/* <Menu.Divider /> */}
+                </Menu.Dropdown>
+              </Menu>
+            ) : (
+              <LoginButton></LoginButton>
+            )}
           </div>
         </SimpleGrid>
       </Header>

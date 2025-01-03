@@ -63,8 +63,8 @@ export default function Register() {
 
         <Box sx={{ maxWidth: 300 }} mx="auto">
           <form
-            onSubmit={form.onSubmit((values) => {
-              fetch("/api/user", {
+            onSubmit={form.onSubmit(async (values) => {
+              const response = await fetch("/api/user", {
                 method: "POST",
                 body: JSON.stringify({
                   name: values.firstName + " " + values.lastName,
@@ -74,6 +74,8 @@ export default function Register() {
                   id: 1,
                 }),
               });
+              const parsedResponse = await response.json();
+              console.log(parsedResponse);
             })}
           >
             <TextInput

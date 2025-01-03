@@ -51,7 +51,7 @@ export default async function handler(req, res) {
             res: res,
           });
 
-          // console.log("user Session: ", user);
+          console.log("user Session: ", user);
         }
       }
 
@@ -82,15 +82,15 @@ export default async function handler(req, res) {
       return Promise.resolve(token);
     },
     async session(session, token) {
-      // console.log("Session. Got User: ", session, token);
+      console.log("Session. Got User: ", session, token);
       if (userAccount !== null) {
-        // console.log("UserAccount Session Generation: ", userAccount);
+        console.log("UserAccount Session Generation: ", userAccount);
         session.user = {
           id: userAccount.id,
           name: `${userAccount.firstName} ${userAccount.lastName}`,
           email: userAccount.email,
         };
-        // console.log("Session.user: ", session.user);
+        console.log("Session.user: ", session.user);
       } else if (
         token &&
         typeof token.user !== typeof undefined &&
@@ -102,7 +102,7 @@ export default async function handler(req, res) {
       } else if (typeof token !== typeof undefined) {
         session.token = token;
       }
-      // console.log("Session: ", session);
+      console.log("Session: ", session);
       return Promise.resolve(session);
     },
   };

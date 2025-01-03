@@ -15,9 +15,7 @@ export function AppFooter() {
       fixed
     >
       <Text m={4} mx={20} align="center">
-        <span style={{ marginRight: "20px" }}>
-          Copyright 2022 Boredom Sucks LLC
-        </span>
+        <span style={{ marginRight: "20px" }}>Copyright 2025 BS Games</span>
         {websiteData.optional.footerBusinessLinks.map((link, i) => (
           <Anchor mx={20} href={link.link} key={i} style={{ color: "white" }}>
             {link.label}

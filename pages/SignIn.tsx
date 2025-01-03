@@ -37,7 +37,6 @@ export default function SignIn() {
           : "Password is 4-16 characters.",
     },
   });
-  console.log("aasdf", theme);
   return (
     <>
       <main className={styles.main}>

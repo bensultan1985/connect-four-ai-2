@@ -6,17 +6,17 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL_UNPOOLED")
 }
 
-model Todo {
-  id        Int      @id @unique @default(autoincrement())
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  content   String?
-  completed Boolean  @default(false)
-  userId    Int
-}
+// model Todo {
+//   id        Int      @id @unique @default(autoincrement())
+//   createdAt DateTime @default(now()) @db.Timestamp(6)
+//   content   String?
+//   completed Boolean  @default(false)
+//   userId    Int
+// }
 
 model Account {
   id                String  @id @default(cuid())

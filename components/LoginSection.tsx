@@ -17,16 +17,15 @@ export default function LoginSection() {
     );
   }
   return (
-    <></>
-    // <span
-    //   style={{ width: "100%", textAlign: "right", display: "inline-block" }}
-    // >
-    //   <Link href={"/Register"}>
-    //     <Button>Register</Button>
-    //   </Link>
-    //   <Link href={"/SignIn"}>
-    //     <Button>Sign in</Button>
-    //   </Link>
-    // </span>
+    <span
+      style={{ width: "100%", textAlign: "right", display: "inline-block" }}
+    >
+      {/* <Link href={"/Register"}>
+        <Button>Register</Button>
+      </Link>
+      <Link href={"/SignIn"}>
+        <Button>Sign in</Button>
+      </Link> */}
+    </span>
   );
 }
