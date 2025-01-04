@@ -16,27 +16,27 @@ export const createUser = async (user: any) => {
   await prisma.$disconnect();
 };
 
-export const createTodo = async (todo: any) => {
-  const data = JSON.parse(todo);
-  const createTodo: Prisma.TodoCreateInput = {
-    content: todo.content,
-    completed: false,
-    userId: todo.userId,
-  };
-  const createdTodo = await prisma.todo.create({ data: createTodo });
-  await prisma.$disconnect();
-};
+// export const createTodo = async (todo: any) => {
+//   const data = JSON.parse(todo);
+//   const createTodo: Prisma.TodoCreateInput = {
+//     content: todo.content,
+//     completed: false,
+//     userId: todo.userId,
+//   };
+//   const createdTodo = await prisma.todo.create({ data: createTodo });
+//   await prisma.$disconnect();
+// };
 
-export const getTodos = async (user: any) => {
-  const data = JSON.parse(user);
-  const todos = await prisma.todo.findMany({
-    where: {
-      userId: data,
-    },
-  });
-  await prisma.$disconnect();
-  return todos;
-};
+// export const getTodos = async (user: any) => {
+//   const data = JSON.parse(user);
+//   const todos = await prisma.todo.findMany({
+//     where: {
+//       userId: data,
+//     },
+//   });
+//   await prisma.$disconnect();
+//   return todos;
+// };
 
 export const createSession = async (session: any) => {
   const data = JSON.parse(session);
@@ -46,15 +46,14 @@ export const createSession = async (session: any) => {
 
 const userService = {
   createUser,
-  createTodo,
 };
 
-const todosService = {
-  getTodos,
-};
+// const todosService = {
+//   getTodos,
+// };
 
 const sessionService = {
   createSession,
 };
 
-export { userService, todosService, sessionService };
+export { userService, sessionService };
