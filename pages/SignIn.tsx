@@ -43,7 +43,7 @@ export default function SignIn() {
         <Title>Sign In</Title>
         <Box mt={20} mb={20}>
           <Link href="/Register">
-            <a>Don't have an account? Register here!</a>
+            <a>Don&#39;t have an account? Register here!</a>
           </Link>
         </Box>
         <Auth labelText="sign in"></Auth>
