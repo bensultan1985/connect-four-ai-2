@@ -8,7 +8,7 @@ import {
   MantineThemeOverride,
 } from "@mantine/core";
 import { SessionProvider } from "next-auth/react";
-import { AppHeader } from "../components/AppHeader";
+import { AppHeader } from "../components/Header/AppHeader";
 import { AppFooter } from "../components/AppFooter";
 import { theme } from "../styles/mantineGlobalTheme";
 import type { Session } from "next-auth";
@@ -39,7 +39,7 @@ export default function App({
         <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
           <AppShell
             fixed={false}
-            padding="lg"
+            // padding="lg"
             header={<AppHeader></AppHeader>}
             footer={<AppFooter></AppFooter>}
           >

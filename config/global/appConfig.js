@@ -22,20 +22,20 @@ export const appConfig = {
           header: "",
           links: [
             {
-              label: "About Us",
-              link: "/about-us",
+              label: "About",
+              link: "/about",
             },
           ],
         },
       ],
       footerBusinessLinks: [
         {
-          label: "About Us",
-          link: "/about-us",
+          label: "About",
+          link: "/about",
         },
         {
-          label: "Terms of Service",
-          link: "/terms-of-service",
+          label: "Terms",
+          link: "/terms",
         },
       ],
     },

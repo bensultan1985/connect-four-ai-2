@@ -1,0 +1,7 @@
+
+@media screen and (max-width: 800px) {
+    .siteTitle {
+        font-size: 1.3em !important;
+        line-height: 2.2em !important;
+    }  
+}

@@ -15,14 +15,14 @@ const ConnectFour: NextPage = (props) => {
     <div className={styles.container}>
       <main className={styles.main}>
         {session?.user?.name && (
-          <Container>
-            <UserDashboard user={session.user.name}></UserDashboard>
-          </Container>
+          // <Container>
+          <UserDashboard user={session.user.name}></UserDashboard>
+          // </Container>
         )}
-        <Container>
-          <Title>Connect Four</Title>
-          <ConnectFourGame></ConnectFourGame>
-          {/* <Image
+        {/* <Container> */}
+        <Title>Connect Four</Title>
+        <ConnectFourGame></ConnectFourGame>
+        {/* <Image
               my="xl"
               src="http://localhost:3000/images/logos/heroimage.jpeg"
               height={200}
@@ -35,7 +35,7 @@ const ConnectFour: NextPage = (props) => {
               </Link>{" "}
               today!
             </Text> */}
-        </Container>
+        {/* </Container> */}
       </main>
     </div>
   );
