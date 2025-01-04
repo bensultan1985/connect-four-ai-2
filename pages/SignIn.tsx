@@ -41,9 +41,12 @@ export default function SignIn() {
     <>
       <main className={styles.main}>
         <Title>Sign In</Title>
-
+        <Box mt={20} mb={20}>
+          <Link href="/Register">
+            <a>Don&#39;t have an account? Register here!</a>
+          </Link>
+        </Box>
         <Auth labelText="sign in"></Auth>
-
         <Box sx={{ maxWidth: 300 }} mx="auto">
           <form
             onSubmit={form.onSubmit((values) =>
