@@ -1,3 +1,3 @@
-export const Terms = () => {
+export default function Terms() {
   return <div></div>;
-};
+}
