@@ -1,3 +1,3 @@
 export const Terms = () => {
-  return <></>;
+  return <div></div>;
 };
